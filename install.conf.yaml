@@ -1,0 +1,21 @@
+- defaults: 
+  link: 
+    relink: true
+
+- clean: ['~']
+
+- link: 
+    ~/.zsh: zsh
+    ~/.zshrc: zsh/zshrc
+    ~/.tmux: tmux
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmux.conf.local: tmux/tmux.conf.local 
+
+- shell:
+  - [git submodule udpate --init --recursive, Installing submodules]
+  - command: git clone git clone git@github.com:tmux-plugins/tpm.git tmux/plugins/tpm || true
+  - command: git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf || true && ~/.fzf/install --completion --key-bindings --no-update-rc
+  - command: cd init.vim && ./install && cd ..
+    stdind: true
+    stdout: true
+    stderr: true
